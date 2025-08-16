@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>مولد أفكار الهدايا الشخصية</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        direction: rtl;
+        text-align: right;
+        background: #f0f8ff;
+        padding: 20px;
+    }
+    h1 {
+        color: #2c3e50;
+    }
+    label {
+        display: block;
+        margin: 10px 0 5px;
+    }
+    input, select, textarea, button {
+        width: 100%;
+        padding: 8px;
+        margin-bottom: 15px;
+        border-radius: 5px;
+        border: 1px solid #ccc;
+    }
+    button {
+        background-color: #3498db;
+        color: white;
+        border: none;
+        cursor: pointer;
+    }
+    button:hover {
+        background-color: #2980b9;
+    }
+    #results {
+        margin-top: 20px;
+        padding: 15px;
+        background: #ecf0f1;
+        border-radius: 5px;
+    }
+</style>
+</head>
+<body>
+
+<h1>💡 مولّد أفكار الهدايا الشخصية</h1>
+<p>ادخل معلومات الشخص والمناسبة للحصول على قائمة أفكار مبتكرة!</p>
+
+<label>الاسم (اختياري):</label>
+<input type="text" id="name">
+
+<label>العلاقة بالشخص:</label>
+<select id="relation">
+    <option value="صديق">صديق</option>
+    <option value="قريب">قريب</option>
+    <option value="زميل">زميل</option>
+    <option value="شريك">شريك</option>
+</select>
+
+<label>الفئة العمرية:</label>
+<select id="age">
+    <option value="طفل">طفل</option>
+    <option value="مراهق">مراهق</option>
+    <option value="شاب">شاب</option>
+    <option value="بالغ">بالغ</option>
+    <option value="كبير">كبير</option>
+</select>
+
+<label>الاهتمامات أو الهوايات:</label>
+<input type="text" id="hobbies" placeholder="مثال: كتب، رياضة، فنون">
+
+<label>المناسبة:</label>
+<select id="occasion">
+    <option value="عيد ميلاد">عيد ميلاد</option>
+    <option value="زواج">زواج</option>
+    <option value="تخرج">تخرج</option>
+    <option value="عيد">عيد</option>
+    <option value="مفاجأة">مفاجأة</option>
+</select>
+
+<button onclick="generateGifts()">🎁 اعرض أفكار الهدايا</button>
+
+<div id="results"></div>
+
+<script>
+function generateGifts() {
+    const name = document.getElementById('name').value;
+    const relation = document.getElementById('relation').value;
+    const age = document.getElementById('age').value;
+    const hobbies = document.getElementById('hobbies').value.split(',').map(h => h.trim());
+    const occasion = document.getElementById('occasion').value;
+
+    const ideas = [
+        `صندوق هدايا مخصص يشمل اهتمامات ${hobbies.join(' و ')}`,
+        `تجربة ممتعة مثل تذاكر لمعرض أو حفلة`,
+        `هدية رقمية: اشتراك في خدمة أو دورة تعليمية`,
+        `هدية شخصية مبتكرة: كوب أو قميص مطبوع باسم ${name || 'الشخص'} أو اقتباس مفضل`,
+        `مجموعة أدوات أو مستلزمات لهواياته (${hobbies.join(', ')})`,
+        `كتاب أو مجموعة كتب مناسبة للفئة العمرية ${age}`,
+        `هدية مفاجئة تعكس العلاقة ${relation} بطريقة مبتكرة`
+    ];
+
+    let randomIdeas = [];
+    while(randomIdeas.length < 3) {
+        const idea = ideas[Math.floor(Math.random() * ideas.length)];
+        if(!randomIdeas.includes(idea)) randomIdeas.push(idea);
+    }
+
+    document.getElementById('results').innerHTML = `
+        <h3>أفكار الهدايا لمناسبة ${occasion}:</h3>
+        <ul>${randomIdeas.map(i => `<li>${i}</li>`).join('')}</ul>
+    `;
+}
+</script>
+
+</body>
+</html>
